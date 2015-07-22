@@ -3,14 +3,12 @@
 ## Date: July 22nd 2015
 ## Description: create plot question 1
 
-library(ggplot2)
-
 FileName <- "exdata-data-NEI_data.zip"
 
 # Downloading and unzipping dataset:
 if (!file.exists(FileName)){
         FileURL <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
-        download.file(fileURL, FileName, method="curl")
+        download.file(FileURL, FileName, method="curl")
 }  
 if (!file.exists("UCI HAR Dataset")) { 
         unzip(FileName) 
@@ -32,10 +30,10 @@ TotEmpYear <- data.frame(aggregate(Emissions ~ year, NEI, sum))
 colnames(TotEmpYear) <- c("Year","Emissions")
 
 png('plot1.png')
-gPlot <- ggplot(data=TotEmpYear, aes(x=Year,y=Emissions)) +
-                geom_bar(colour="black", fill="#DD8888", width=.8, stat="identity") +
-                guides(fill=FALSE) +
-                xlab("Years") + ylab("Total PM'[2.5]*' Emission") +
-                ggtitle("Total PM'[2.5]*' Emissions from 1999 to 2008")
-
-
+barplot(height = TotEmpYear$Emissions,
+        names.arg = TotEmpYear$Year,
+        xlab = "Years",
+        ylab = expression('Total PM'[2.5]*' Emission'),
+        col = c("blue","red","yellow","green"),
+        main = expression('Total PM'[2.5]*' Emissions from 1999 to 2008'))
+dev.off()

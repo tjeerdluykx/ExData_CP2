@@ -13,7 +13,7 @@ if (!file.exists(FileName)){
         FileURL <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
         download.file(FileURL, FileName, method="curl")
 }  
-if (!file.exists("UCI HAR Dataset")) { 
+if (!file.exists("exdata-data-NEI_data")) { 
         unzip(FileName) 
 }
 
